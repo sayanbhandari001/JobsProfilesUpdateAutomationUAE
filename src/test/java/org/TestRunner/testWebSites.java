@@ -10,7 +10,8 @@ public class testWebSites {
     @Test()
     public void indeedWebsiteTest() {
 
-        WebDriver driver = decideBrowser.passBrowserData("chrome");
+        WebDriver driver = decideBrowser.passBrowserData("edge");
+        driver.get("https://google.com");
 
     }
 }
