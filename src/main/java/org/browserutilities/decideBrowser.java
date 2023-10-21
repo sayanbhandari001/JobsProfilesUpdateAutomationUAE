@@ -10,20 +10,20 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class decideBrowser {
 
-    static WebDriver driver;
+    protected static WebDriver driver;
 
     public static WebDriver passBrowserData(String browser) {
         if (browser.equals("chrome")) {
             ChromeOptions options = new ChromeOptions();
-            options.setBrowserVersion("118");
+            options.setBrowserVersion("117");
             return new ChromeDriver(options);
         } else if (browser.equals("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
-            options.setBrowserVersion("118");
+            options.setBrowserVersion("117");
             return new FirefoxDriver(options);
         } else if (browser.equals("edge")) {
             EdgeOptions options = new EdgeOptions();
-            options.setBrowserVersion("118");
+            options.setBrowserVersion("117");
             return new EdgeDriver(options);
         } else {
             return null;
