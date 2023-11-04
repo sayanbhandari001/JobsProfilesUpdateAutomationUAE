@@ -15,13 +15,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <junit.version>4.11</junit.version>
+        <selenium-java.version>4.13.0</selenium-java.version>
+        <testng.version>7.8.0</testng.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
+        <allure-testng.version>2.24.0</allure-testng.version>
+        <aspectjweaver.version>1.9.20.1</aspectjweaver.version>
     </properties>
 
     <dependencies>
+
+        <!-- Junit dependency-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -29,15 +38,22 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.13.0</version>
+            <version>${selenium-java.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.8.0</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
         </dependency>
 
     </dependencies>
@@ -48,11 +64,26 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <parallel>methods</parallel>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
+<!--                        <parallel>methods</parallel>-->
+<!--                        <threadCount>10</threadCount>-->
+<!--                        <useUnlimitedThreads>true</useUnlimitedThreads>-->
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectjweaver.version}</version>
+                        </dependency>
+                    </dependencies>
+
                 </plugin>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
                 <plugin>
@@ -99,9 +130,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
