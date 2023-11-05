@@ -1,5 +1,6 @@
 package org.TestRunner;
 
+import org.testng.annotations.Test;
 import org.browserutilities.decideBrowser;
 import org.pageObjects.baytPagesUAE;
 import org.pageObjects.indeedAEPageUAE;
