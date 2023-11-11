@@ -17,9 +17,7 @@ public class baytPagesUAE {
 
 
     public void emailAddressInput(String userEmail){
-
-    driver.findElement(emailAddresslocator).sendKeys(userEmail);
-
+        driver.findElement(emailAddresslocator).sendKeys(userEmail);
     }
 
 }

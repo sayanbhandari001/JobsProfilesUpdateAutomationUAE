@@ -1,5 +1,6 @@
 package org.browserutilities;
 
+import AppHooks.ApplicationHooks;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,25 +9,47 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.io.IOException;
+import java.time.Duration;
+
+
 public class decideBrowser {
 
     protected static WebDriver driver;
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
     public static WebDriver passBrowserData(String browser) {
+
+        //Launching browser
+        System.out.println("Browser Started is " + browser);
+
         if (browser.equals("chrome")) {
             ChromeOptions options = new ChromeOptions();
-            options.setBrowserVersion("117");
-            return new ChromeDriver(options);
+            options.addArguments("--disable-notifications");
+            options.setBrowserVersion("118");
+            driver = new ChromeDriver(options);
         } else if (browser.equals("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
             options.setBrowserVersion("117");
-            return new FirefoxDriver(options);
+            driver = new FirefoxDriver(options);
         } else if (browser.equals("edge")) {
             EdgeOptions options = new EdgeOptions();
             options.setBrowserVersion("117");
-            return new EdgeDriver(options);
+            driver = new EdgeDriver(options);
         } else {
-            return null;
+            throw new RuntimeException("Please pass Browser Data in Config file " + browser);
         }
+
+        return getDriver();
     }
+
+    public static void browserFeaturesEnabled(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().window().maximize();
+    }
+
 }
