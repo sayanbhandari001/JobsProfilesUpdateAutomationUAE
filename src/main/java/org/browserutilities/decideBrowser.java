@@ -15,7 +15,16 @@ import java.time.Duration;
 
 public class decideBrowser {
 
-    protected static WebDriver driver;
+    static ApplicationHooks apk = new ApplicationHooks();
+    static {
+        try {
+            apk.getProperty();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static WebDriver driver;
 
     public static WebDriver getDriver() {
         return driver;
@@ -26,7 +35,7 @@ public class decideBrowser {
         //Launching browser
         System.out.println("Browser Started is " + browser);
 
-        if (browser.equals("chrome")) {
+        if (browser.equals(apk.getProperties().getProperty("browser"))) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-notifications");
             options.setBrowserVersion("118");
