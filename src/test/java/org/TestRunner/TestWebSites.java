@@ -22,7 +22,7 @@ public class TestWebSites extends decideBrowser {
             e.printStackTrace();
         }
     }
-    String indeedUrl = "https://ae.indeed.com";
+
     String baytUrl = "https://www.bayt.com/en/login/";
     String gulfTalentUrl = "https://www.gulftalent.com/";
 
@@ -39,8 +39,8 @@ public class TestWebSites extends decideBrowser {
     @Test(priority = 1, groups = {"RegressionTest", "SmokeTest"})
     public void indeedWebsiteTest() {
         System.out.println("Executing Indeed UAE Profile update of User");
-        driver.get(indeedUrl);
-        System.out.println("Indeed Website url used is " + indeedUrl);
+        String printindeedURLOpen = indeedUAE.indeedURLOpen();
+        System.out.println("Indeed Website url used is " + printindeedURLOpen);
         indeedUAE.signIntoIndeed();
         //System.out.println(indeedUAE.signIntoIndeed());
     }
